@@ -1,4 +1,4 @@
-package App.Controllers.Enums;
+package Api.Controllers.Enums;
 
 public enum Response {
     INVALID_PARAMS("Invalid parameters"),

@@ -1,10 +1,10 @@
-package App.Controllers;
+package Api.Controllers;
 
-import App.Entity.User;
-import App.Controllers.Enums.Response;
-import App.Models.AuthorisationModel;
-import App.Models.UserRegisterModel;
-import App.Service.UserService;
+import Api.Entity.User;
+import Api.Controllers.Enums.Response;
+import Api.Models.AuthorisationModel;
+import Api.Models.UserRegisterModel;
+import Api.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.naming.AuthenticationException;
 import javax.validation.Valid;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @RestController
 public class UserController {

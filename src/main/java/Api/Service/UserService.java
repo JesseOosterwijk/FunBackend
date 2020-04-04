@@ -1,7 +1,7 @@
-package App.Service;
+package Api.Service;
 
-import App.Entity.User;
-import App.Repository.UserRepository;
+import Api.Entity.User;
+import Api.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +32,5 @@ public class UserService {
     public Optional<User> findByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
+
 }

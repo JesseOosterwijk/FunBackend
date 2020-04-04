@@ -1,4 +1,4 @@
-package App.Entity;
+package Api.Entity;
 
 import java.util.UUID;
 
