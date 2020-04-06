@@ -1,13 +1,27 @@
 package Api.Repository;
 
 import Api.Entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
-    Optional<User> findUserByEmail(String email);
+public class UserRepository {
+
+    private Connection connection;
+
+    public UserRepository(Connection con) {
+        this.connection = con;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return new ArrayList<>();
+    }
+
+    public User getUserByEmail(String email) throws SQLException {
+        String query = "SELECT * FROM [User] WHERE Email = ?";
+        return new User();
+
+    }
 }

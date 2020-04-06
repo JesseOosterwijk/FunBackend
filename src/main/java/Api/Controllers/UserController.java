@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import sun.jvm.hotspot.StackTrace;
 
 import javax.validation.Valid;
 
@@ -28,32 +28,16 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     public ResponseEntity login(@Valid @RequestBody AuthorisationModel authModel) {
-        User user = userService.findByEmail(authModel.getEmail())
-                .orElseThrow(() -> { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Response.WRONG_CREDENTIALS.toString()); });
-
-        if (true) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Response.WRONG_CREDENTIALS.toString());
-        }
-
         try {
+            userService.login(authModel.getEmail(), authModel.getPassword());
             return ResponseEntity.ok(authModel);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Response.UNEXPECTED_ERROR.toString());
+        } catch(Exception ex) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
-    public ResponseEntity register(@Valid @RequestBody UserRegisterModel regModel) {
-        if (userService.findByEmail(regModel.getEmail()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Response.USER_ALREADY_EXISTS.toString());
-        }
-
-        try {
-            User user = new User();
-            return ResponseEntity.ok(regModel);
-        } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Response.UNEXPECTED_ERROR.toString());
-        }
+    public void register(@Valid @RequestBody UserRegisterModel regModel) {
     }
 }
