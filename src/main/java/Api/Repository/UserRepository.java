@@ -17,7 +17,11 @@ public class UserRepository {
     }
 
     public ArrayList<User> getAllUsers() {
-        return new ArrayList<>();
+        String query = "SELECT * FROM [User]";
+        List<User> statement = connection.query(query, new BeanPropertyRowMapper<User>());
+        ArrayList<User> users = new ArrayList<User>();
+        users.addAll(statement);
+        return users;
     }
 
     public User getUserByEmail(String email) throws SQLException {
@@ -31,4 +35,11 @@ public class UserRepository {
         String query = "INSERT INTO [User] ([E-mail], [Name], [Password]) VALUES (?, ?, ?)";
         connection.update(query, email, username, password);
     }
+
+    public void deleteUser(String email) {
+        String query = "DELETE [User] WHERE [E-mail] = ?";
+        connection.update(query, email);
+    }
+
+
 }
