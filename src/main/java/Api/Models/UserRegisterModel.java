@@ -12,6 +12,17 @@ public class UserRegisterModel {
     @Email(message = "invalid email")
     private String email;
 
+    public String getName() {
+        return name;
+    }
+
+    private String name;
+    public String getPassword() {
+        return password;
+    }
+
+
+
     @NotEmpty(message = "Please enter a password")
     private String password;
 }

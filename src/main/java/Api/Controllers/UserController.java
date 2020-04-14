@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import sun.jvm.hotspot.StackTrace;
 
 import javax.validation.Valid;
+
 
 @RestController
 public class UserController {
@@ -38,6 +38,13 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
-    public void register(@Valid @RequestBody UserRegisterModel regModel) {
+    public ResponseEntity register(@Valid @RequestBody UserRegisterModel regModel) {
+        try {
+            userService.register(regModel.getEmail(), regModel.getName(), regModel.getPassword());
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 }

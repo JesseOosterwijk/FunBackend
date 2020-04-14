@@ -4,6 +4,8 @@ import Api.Entity.User;
 import Api.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+
 @Service
 public class UserService {
     private UserRepository userRepository;
@@ -18,6 +20,14 @@ public class UserService {
                 return user;
             } else {
             throw new Exception();
+        }
+    }
+
+    public void register(String email, String username, String password) throws SQLException {
+        try {
+            userRepository.registerUser(email, username, password);
+        } catch(Exception e) {
+            throw e;
         }
     }
 }
