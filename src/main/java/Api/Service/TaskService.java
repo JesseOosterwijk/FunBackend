@@ -1,6 +1,6 @@
 package Api.Service;
 
-import Api.Repository.TaskRepository;
+import Api.JpaRepository.TaskRepository;
 
 public class TaskService {
 

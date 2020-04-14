@@ -14,50 +14,50 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID Id;
+    private UUID id;
 
     @NotBlank
-    private String Name;
+    private String name;
 
     @NotBlank
-    private String Email;
+    private String email;
 
     @JsonIgnore
     @NotBlank
-    private String Password;
+    private String password;
 
     @JsonIgnore
     public UUID getId() {
-        return Id;
+        return id;
     }
 
     @JsonIgnore
     public String getName() {
-        return Name;
+        return name;
     }
 
     @JsonIgnore
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     @JsonIgnore
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     @JsonIgnore
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     @JsonIgnore
     public void setEmail(String email) {
-        this.Email = email;
+        this.email = email;
     }
 
     @JsonIgnore
     public void setPassword(String password) {
-        this.Password = password;
+        this.password = password;
     }
 }

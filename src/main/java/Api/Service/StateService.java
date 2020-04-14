@@ -1,6 +1,6 @@
 package Api.Service;
 
-import Api.Repository.StateRepository;
+import Api.JpaRepository.StateRepository;
 
 public class StateService {
 

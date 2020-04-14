@@ -1,12 +1,11 @@
-package Api.Repository;
+package Api.JdbcRepository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class TaskRepository {
+public class ProjectRepository {
     private JdbcTemplate connection;
 
-    public TaskRepository(JdbcTemplate con) {
+    public ProjectRepository(JdbcTemplate con) {
         this.connection = con;
     }
-
 }

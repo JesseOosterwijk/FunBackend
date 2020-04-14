@@ -1,6 +1,6 @@
 package Api.Service;
 
-import Api.Repository.ProjectRepository;
+import Api.JpaRepository.ProjectRepository;
 
 public class ProjectService {
 

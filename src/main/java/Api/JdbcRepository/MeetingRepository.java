@@ -1,12 +1,11 @@
-package Api.Repository;
+package Api.JdbcRepository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class StateRepository {
+public class MeetingRepository {
     private JdbcTemplate connection;
 
-    public StateRepository(JdbcTemplate con) {
+    public MeetingRepository(JdbcTemplate con) {
         this.connection = con;
     }
-
 }

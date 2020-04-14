@@ -1,4 +1,4 @@
-package Api.Repository;
+package Api.JdbcRepository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

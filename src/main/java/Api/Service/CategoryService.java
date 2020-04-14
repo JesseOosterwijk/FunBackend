@@ -1,7 +1,7 @@
 package Api.Service;
 
 
-import Api.Repository.CategoryRepository;
+import Api.JpaRepository.CategoryRepository;
 
 public class CategoryService {
 

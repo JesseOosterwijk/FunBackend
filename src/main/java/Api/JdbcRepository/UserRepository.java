@@ -1,4 +1,4 @@
-package Api.Repository;
+package Api.JdbcRepository;
 
 import Api.Entity.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

@@ -1,6 +1,6 @@
 package Api.Service;
 
-import Api.Repository.MeetingRepository;
+import Api.JpaRepository.MeetingRepository;
 
 public class MeetingService {
 

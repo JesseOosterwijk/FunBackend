@@ -1,7 +1,5 @@
 package Api.Controllers.Config;
 
-import Api.Entity.User;
-import Api.Repository.*;
 import Api.Service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

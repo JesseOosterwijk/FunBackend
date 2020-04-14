@@ -1,11 +1,12 @@
-package Api.Repository;
+package Api.JdbcRepository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class CategoryRepository {
+public class StateRepository {
     private JdbcTemplate connection;
 
-    public CategoryRepository(JdbcTemplate con) {
+    public StateRepository(JdbcTemplate con) {
         this.connection = con;
     }
+
 }

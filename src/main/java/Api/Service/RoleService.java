@@ -1,6 +1,6 @@
 package Api.Service;
 
-import Api.Repository.RoleRepository;
+import Api.JpaRepository.RoleRepository;
 
 public class RoleService {
 

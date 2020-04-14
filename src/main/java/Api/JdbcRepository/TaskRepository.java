@@ -1,11 +1,12 @@
-package Api.Repository;
+package Api.JdbcRepository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class MeetingRepository {
+public class TaskRepository {
     private JdbcTemplate connection;
 
-    public MeetingRepository(JdbcTemplate con) {
+    public TaskRepository(JdbcTemplate con) {
         this.connection = con;
     }
+
 }
