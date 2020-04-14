@@ -16,8 +16,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID Id;
 
-
-
     @NotBlank
     private String Name;
 

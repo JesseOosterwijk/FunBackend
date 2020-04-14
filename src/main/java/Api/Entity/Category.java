@@ -9,9 +9,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "Project")
+@Table(name = "Category")
 @EntityListeners(AuditingEntityListener.class)
-public class Project {
+public class Category {
 
     @Id
     private int Id;

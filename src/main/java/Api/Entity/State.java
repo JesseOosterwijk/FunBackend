@@ -9,18 +9,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "Project")
+@Table(name = "State")
 @EntityListeners(AuditingEntityListener.class)
-public class Project {
+public class State {
 
     @Id
     private int Id;
 
     @NotBlank
     private String Name;
-
-    @NotBlank
-    private String Description;
 
     public int getId() {
         return Id;
@@ -30,15 +27,7 @@ public class Project {
         return Name;
     }
 
-    public String getDescription() {
-        return Description;
-    }
-
     public void setName(String name) {
         Name = name;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
     }
 }

@@ -7,11 +7,13 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
-@Table(name = "Project")
+@Table(name = "Meeting")
 @EntityListeners(AuditingEntityListener.class)
-public class Project {
+public class Meeting {
 
     @Id
     private int Id;
@@ -21,6 +23,9 @@ public class Project {
 
     @NotBlank
     private String Description;
+
+    @NotNull
+    private Date Date;
 
     public int getId() {
         return Id;
@@ -34,11 +39,19 @@ public class Project {
         return Description;
     }
 
+    public java.util.Date getDate() {
+        return Date;
+    }
+
     public void setName(String name) {
         Name = name;
     }
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public void setDate(java.util.Date date) {
+        Date = date;
     }
 }

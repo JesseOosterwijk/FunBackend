@@ -1,7 +1,5 @@
 package Api.Controllers;
 
-import Api.Entity.User;
-import Api.Controllers.Enums.Response;
 import Api.Models.AuthorisationModel;
 import Api.Models.UserRegisterModel;
 import Api.Service.UserService;

@@ -40,6 +40,4 @@ public class UserRepository {
         String query = "DELETE [User] WHERE [E-mail] = ?";
         connection.update(query, email);
     }
-
-
 }
