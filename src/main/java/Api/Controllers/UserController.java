@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity login(@Valid @RequestBody AuthorisationModel authModel) {
         try {
-            User user = userService.findbyEmail(authModel.getEmail())
+            User user = userService.findByEmail(authModel.getEmail())
                     .orElseThrow(() -> { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, Response.WRONG_CREDENTIALS.toString()); });
             if(!authModel.getPassword().equals(user.getPassword())) {
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -45,15 +45,17 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
     public ResponseEntity register(@Valid @RequestBody UserRegisterModel regModel) {
-        if(userService.findbyEmail(regModel.getEmail()).isPresent()) {
+        if(userService.findByEmail(regModel.getEmail()).isPresent()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
         try {
+
             User user = new User();
             user.setEmail(regModel.getEmail());
             user.setName(regModel.getName());
             user.setPassword(regModel.getPassword());
+            userService.createOrUpdateUser(user);
 
             return new ResponseEntity(HttpStatus.OK);
         } catch (Exception ex) {

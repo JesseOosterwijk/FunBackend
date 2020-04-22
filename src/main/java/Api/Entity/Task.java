@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Task")
-@EntityListeners(AuditingEntityListener.class)
 public class Task {
 
     @Id

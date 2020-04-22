@@ -5,7 +5,6 @@ import Api.JpaRepository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 @Service
@@ -18,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Optional<User> findbyEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return this.userRepository.findUserByEmail(email);
     }
     public User login(User user) {

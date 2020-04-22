@@ -1,33 +1,34 @@
 package Api.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.UUID;
 
 @Entity
-@Table(name = "User")
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "Users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @NotBlank
+    @Column(name = "Name")
     private String name;
 
     @NotBlank
+    @Column(name = "Email")
     private String email;
 
     @JsonIgnore
     @NotBlank
+    @Column(name = "Password")
     private String password;
 
     @JsonIgnore
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
