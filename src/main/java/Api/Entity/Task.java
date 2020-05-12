@@ -2,11 +2,9 @@ package Api.Entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "Task")
@@ -21,9 +19,19 @@ public class Task {
     @NotBlank
     private String Description;
 
+    @ManyToMany
+    private Set<Category> Categories;
     public int getId() {
         return Id;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "ProjectId")
+    private Project Project;
+
+    @ManyToOne
+    @JoinColumn(name = "StateId")
+    private State State;
 
     public String getName() {
         return Name;

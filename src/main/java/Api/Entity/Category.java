@@ -2,11 +2,9 @@ package Api.Entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "Category")
@@ -21,6 +19,9 @@ public class Category {
 
     @NotBlank
     private String Description;
+
+    @ManyToMany
+    private Set<Task> Tasks;
 
     public int getId() {
         return Id;

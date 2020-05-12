@@ -2,11 +2,9 @@ package Api.Entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "Project")
@@ -21,6 +19,12 @@ public class Project {
 
     @NotBlank
     private String Description;
+
+    @ManyToMany(mappedBy = "Projects")
+    private Set<User> Users;
+
+    @OneToMany(mappedBy = "Project")
+    private Set<Task> Tasks;
 
     public int getId() {
         return Id;
@@ -40,5 +44,22 @@ public class Project {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public void setUsers(Set<User> users) {
+        Users = users;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        Tasks = tasks;
+    }
+
+    public void addUser(User user) {
+        Users.add(user);
+        user.getProjects().add(this);
     }
 }

@@ -2,11 +2,9 @@ package Api.Entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "Role")
@@ -22,6 +20,8 @@ public class Role {
     @NotBlank
     private String Description;
 
+    @ManyToMany(mappedBy = "Roles")
+    private Set<User> Users;
     public int getId() {
         return Id;
     }
@@ -40,5 +40,10 @@ public class Role {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public void addUser(User user) {
+        Users.add(user);
+        user.getRoles().add(this);
     }
 }

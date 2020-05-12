@@ -20,9 +20,6 @@ public class UserService {
     public Optional<User> findByEmail(String email) {
         return this.userRepository.findUserByEmail(email);
     }
-    public User login(User user) {
-        return new User();
-    }
 
     public void createOrUpdateUser(User user) {
         try {
@@ -30,5 +27,9 @@ public class UserService {
         } catch(Exception e) {
             throw e;
         }
+    }
+
+    public void register(){
+        ;
     }
 }

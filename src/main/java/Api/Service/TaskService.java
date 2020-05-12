@@ -16,7 +16,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void createOrUpdateState(Task task) {
+    public void createOrUpdateTask(Task task) {
         try {
             taskRepository.save(task);
         } catch (Exception e) {

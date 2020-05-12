@@ -2,13 +2,11 @@ package Api.Entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import Api.Entity.Project;
 
 @Entity
 @Table(name = "Meeting")
@@ -27,6 +25,10 @@ public class Meeting {
     @NotNull
     private Date Date;
 
+    @ManyToOne
+    @JoinColumn(name="ProjectId")
+    private Project Project;
+
     public int getId() {
         return Id;
     }
@@ -39,7 +41,7 @@ public class Meeting {
         return Description;
     }
 
-    public java.util.Date getDate() {
+    public Date getDate() {
         return Date;
     }
 
@@ -51,7 +53,15 @@ public class Meeting {
         Description = description;
     }
 
-    public void setDate(java.util.Date date) {
+    public void setDate(Date date) {
         Date = date;
+    }
+
+    public Project getProject() {
+        return Project;
+    }
+
+    public void setProject(Project project) {
+        Project = project;
     }
 }
