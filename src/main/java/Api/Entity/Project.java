@@ -21,7 +21,7 @@ public class Project {
     private String Description;
 
     @ManyToMany(mappedBy = "Projects")
-    private Set<User> Users;
+    private Set<User> users;
 
     @OneToMany(mappedBy = "Project")
     private Set<Task> Tasks;
@@ -51,7 +51,7 @@ public class Project {
     }
 
     public void setUsers(Set<User> users) {
-        Users = users;
+        this.users = users;
     }
 
     public void setTasks(Set<Task> tasks) {
@@ -59,7 +59,7 @@ public class Project {
     }
 
     public void addUser(User user) {
-        Users.add(user);
+        users.add(user);
         user.getProjects().add(this);
     }
 }

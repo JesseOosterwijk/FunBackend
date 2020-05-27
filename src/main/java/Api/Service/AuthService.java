@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.JacksonDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
@@ -36,16 +37,21 @@ public class AuthService {
     private UserRepository userRepo;
     private final PublicKey pubKey;
 
+    @Autowired
     public AuthService(HttpService httpService, UserRepository userRepo) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, URISyntaxException {
         this.httpService = httpService;
         this.userRepo = userRepo;
+        this.pubKey = getPubKey();
+
+    }
+
+    private PublicKey getPubKey() throws IOException, URISyntaxException, NoSuchAlgorithmException, InvalidKeySpecException {
         CompletableFuture<HttpResponse<PublicKeyResponse>> future = httpService.requestAsync(Endpoints.AUTHSERVER + "/auth/key", HttpMethod.GET, PublicKeyResponse.class);
         HttpResponse<PublicKeyResponse> response = future.join();
         PublicKeyResponse keyResponse = response.body();
         String base64Key = keyResponse.getPublicKey();
         byte[] keyBytes = Base64.getDecoder().decode(base64Key);
-        this.pubKey = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(keyBytes, "RSA"));
-
+        return KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(keyBytes, "RSA"));
     }
 
     public LoginResponse login(LoginRequest request) throws ExecutionException, InterruptedException, AuthenticationException, IOException, URISyntaxException {

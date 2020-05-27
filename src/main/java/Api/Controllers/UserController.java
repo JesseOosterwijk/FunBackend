@@ -1,15 +1,10 @@
 package Api.Controllers;
 
-import Api.Controllers.Enums.Response;
-import Api.Entity.User;
 import Api.Helpers.Data.TokenData;
 import Api.Helpers.Requests.LoginRequest;
 import Api.Helpers.Requests.RegisterRequest;
 import Api.Helpers.Requests.VerifyRequest;
 import Api.Helpers.Responses.LoginResponse;
-import Api.Helpers.Responses.RegisterResponse;
-import Api.Models.AuthorisationModel;
-import Api.Models.UserRegisterModel;
 import Api.Service.AuthService;
 import Api.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

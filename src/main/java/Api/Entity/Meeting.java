@@ -26,7 +26,7 @@ public class Meeting {
     private Date Date;
 
     @ManyToOne
-    @JoinColumn(name="ProjectId")
+    @JoinColumn(name="project_id")
     private Project Project;
 
     public int getId() {

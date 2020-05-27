@@ -14,7 +14,6 @@ public class User {
 
     @Id
     @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @NotBlank
@@ -31,15 +30,15 @@ public class User {
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "ProjectUsers",
-            joinColumns = {@JoinColumn(name = "UserId")},
-            inverseJoinColumns = {@JoinColumn(name = "ProjectId")})
+    @JoinTable(name = "project_users",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")})
     private Set<Project> Projects = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "UserRoles",
-            joinColumns = {@JoinColumn(name = "UserId")},
-            inverseJoinColumns = {@JoinColumn(name = "RoleId")})
+    @JoinTable(name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> Roles;
 
     @JsonIgnore

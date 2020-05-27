@@ -26,11 +26,11 @@ public class Task {
     }
 
     @ManyToOne
-    @JoinColumn(name = "ProjectId")
+    @JoinColumn(name = "project_id")
     private Project Project;
 
     @ManyToOne
-    @JoinColumn(name = "StateId")
+    @JoinColumn(name = "state_id")
     private State State;
 
     public String getName() {
