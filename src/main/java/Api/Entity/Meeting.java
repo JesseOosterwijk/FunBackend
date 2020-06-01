@@ -3,8 +3,10 @@ package Api.Entity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import Api.Entity.Project;
 
@@ -14,15 +16,22 @@ import Api.Entity.Project;
 public class Meeting {
 
     @Id
+    @Column(name = "Id")
     private int Id;
 
     @NotBlank
+    @Column(name = "Name")
+    @Size(min = 2)
     private String Name;
 
     @NotBlank
+    @Column(name = "Description")
+    @Size(min = 10)
     private String Description;
 
     @NotNull
+    @Column(name = "Date")
+    @Future
     private Date Date;
 
     @ManyToOne
@@ -47,6 +56,10 @@ public class Meeting {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public void setDescription(String description) {

@@ -3,7 +3,9 @@ package Api.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -16,17 +18,21 @@ public class User {
     @Column(name = "Id")
     private UUID id;
 
-    @NotBlank
+
     @Column(name = "Name")
+    @Size(min = 3, message = "Name not long enough")
     private String name;
 
-    @NotBlank
+
     @Column(name = "Email")
+    @Size(min = 4, message = "email not valid")
+    @Email
     private String email;
 
     @JsonIgnore
-    @NotBlank
+
     @Column(name = "Password")
+    @Size(min = 5, message = "password not long enough")
     private String password;
 
     @ManyToMany
