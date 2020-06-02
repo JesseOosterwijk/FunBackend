@@ -16,9 +16,9 @@ public class IntegrationTest {
         browser = new ChromeDriver(options);
     }
 
-    @Test
-    void ShouldBeValid()
-    {
-        Setup();
-    }
+//    @Test
+//    void ShouldBeValid()
+//    {
+//        Setup();
+//    }
 }
