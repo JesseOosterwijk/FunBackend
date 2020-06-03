@@ -27,7 +27,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = NONE)
-public class MeetingTests {
+public class TestMeeting {
 
     public Validator validator;
     public Meeting testMeeting = new Meeting();

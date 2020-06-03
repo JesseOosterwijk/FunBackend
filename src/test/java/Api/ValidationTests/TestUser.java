@@ -25,7 +25,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = NONE)
-public class UserTests {
+public class TestUser {
 
     public Validator validator;
     User testUser = new User();

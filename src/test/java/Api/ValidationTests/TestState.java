@@ -1,7 +1,6 @@
 package Api.ValidationTests;
 
-import Api.Entity.Category;
-import Api.Entity.Task;
+import Api.Entity.State;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
@@ -23,41 +21,31 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = NONE)
-public class CategoryTests {
+public class TestState {
 
     public Validator validator;
-    public Category testCategory = new Category();
+    public State testState = new State();
 
     @Before
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        testCategory.setDescription("placeholder");
-        testCategory.setName("placeholder");
-        testCategory.setId(0);
-        testCategory.setTasks(new HashSet<Task>());
+        testState.setId(0);
+        testState.setName("placeholder");
     }
 
     @Test
-    public void CategoryShouldBeValid()
+    public void StateShouldBeValid()
     {
-        Set<ConstraintViolation<Category>> violations = validator.validate(testCategory);
+        Set<ConstraintViolation<State>> violations = validator.validate(testState);
         Assert.assertTrue(violations.isEmpty());
     }
 
     @Test
-    public void CategoryNameShouldBeConstrained()
+    public void StateNameShouldBeConstrained()
     {
-        testCategory.setName("1");
-        Set<ConstraintViolation<Category>> violations = validator.validate(testCategory);
-        Assert.assertFalse(violations.isEmpty());
-    }
-
-    @Test
-    public void CategoryDescriptionShouldBeConstrained()
-    {
-        testCategory.setDescription("short");
-        Set<ConstraintViolation<Category>> violations = validator.validate(testCategory);
+        testState.setName("");
+        Set<ConstraintViolation<State>> violations = validator.validate(testState);
         Assert.assertFalse(violations.isEmpty());
     }
 }

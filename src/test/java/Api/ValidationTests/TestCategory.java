@@ -1,7 +1,6 @@
 package Api.ValidationTests;
 
-import Api.Entity.Project;
-import Api.Entity.State;
+import Api.Entity.Category;
 import Api.Entity.Task;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,43 +23,41 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = NONE)
-public class TaskTests {
+public class TestCategory {
 
     public Validator validator;
-    public Task testTask = new Task();
+    public Category testCategory = new Category();
 
     @Before
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        testTask.setId(0);
-        testTask.setName("placeholder");
-        testTask.setDescription("placeholder");
-        testTask.setProject(new Project());
-        testTask.setCategories(new HashSet<>());
-        testTask.setState(new State());
+        testCategory.setDescription("placeholder");
+        testCategory.setName("placeholder");
+        testCategory.setId(0);
+        testCategory.setTasks(new HashSet<Task>());
     }
 
     @Test
-    public void TaskShouldBeValid()
+    public void CategoryShouldBeValid()
     {
-        Set<ConstraintViolation<Task>> violations = validator.validate(testTask);
+        Set<ConstraintViolation<Category>> violations = validator.validate(testCategory);
         Assert.assertTrue(violations.isEmpty());
     }
 
     @Test
-    public void TaskNameShouldBeConstrained()
+    public void CategoryNameShouldBeConstrained()
     {
-        testTask.setName("");
-        Set<ConstraintViolation<Task>> violations = validator.validate(testTask);
-        Assert.assertFalse(violations.isEmpty());
-    }
-    @Test
-    public void TaskDescriptionShouldBeConstrained()
-    {
-        testTask.setDescription("");
-        Set<ConstraintViolation<Task>> violations = validator.validate(testTask);
+        testCategory.setName("1");
+        Set<ConstraintViolation<Category>> violations = validator.validate(testCategory);
         Assert.assertFalse(violations.isEmpty());
     }
 
+    @Test
+    public void CategoryDescriptionShouldBeConstrained()
+    {
+        testCategory.setDescription("short");
+        Set<ConstraintViolation<Category>> violations = validator.validate(testCategory);
+        Assert.assertFalse(violations.isEmpty());
+    }
 }

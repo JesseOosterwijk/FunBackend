@@ -1,7 +1,8 @@
 package Api.ValidationTests;
 
-import Api.Entity.Meeting;
 import Api.Entity.Project;
+import Api.Entity.State;
+import Api.Entity.Task;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,42 +24,43 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = NONE)
-public class ProjectTests {
+public class TestTask {
 
     public Validator validator;
-    public Project testProject = new Project();
+    public Task testTask = new Task();
 
     @Before
-    public void SetUp() {
+    public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        testProject.setId(0);
-        testProject.setName("placeholder");
-        testProject.setDescription("placeholder");
-        testProject.setTasks(new HashSet<>());
-        testProject.setUsers(new HashSet<>());
+        testTask.setId(0);
+        testTask.setName("placeholder");
+        testTask.setDescription("placeholder");
+        testTask.setProject(new Project());
+        testTask.setCategories(new HashSet<>());
+        testTask.setState(new State());
     }
 
     @Test
-    public void ProjectShouldBeValid()
+    public void TaskShouldBeValid()
     {
-        Set<ConstraintViolation<Project>> violations = validator.validate(testProject);
+        Set<ConstraintViolation<Task>> violations = validator.validate(testTask);
         Assert.assertTrue(violations.isEmpty());
     }
 
     @Test
-    public void ProjectNameShouldBeConstrained()
+    public void TaskNameShouldBeConstrained()
     {
-        testProject.setName("");
-        Set<ConstraintViolation<Project>> violations = validator.validate(testProject);
+        testTask.setName("");
+        Set<ConstraintViolation<Task>> violations = validator.validate(testTask);
+        Assert.assertFalse(violations.isEmpty());
+    }
+    @Test
+    public void TaskDescriptionShouldBeConstrained()
+    {
+        testTask.setDescription("");
+        Set<ConstraintViolation<Task>> violations = validator.validate(testTask);
         Assert.assertFalse(violations.isEmpty());
     }
 
-    @Test
-    public void ProjectDescriptionShouldBeConstrained()
-    {
-        testProject.setDescription("");
-        Set<ConstraintViolation<Project>> violations = validator.validate(testProject);
-        Assert.assertFalse(violations.isEmpty());
-    }
 }

@@ -22,7 +22,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = NONE)
-public class RoleTests {
+public class TestRole {
 
     public Validator validator;
     public Role testRole = new Role();
