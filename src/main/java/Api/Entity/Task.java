@@ -1,6 +1,8 @@
 package Api.Entity;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,74 +15,76 @@ public class Task {
 
     @Id
     @Column(name = "Id")
-    private int Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @NotBlank
     @Column(name = "Name")
     @Size(min = 2)
-    private String Name;
+    private String name;
 
     @NotBlank
     @Column(name = "Description")
     @Size(min = 10)
-    private String Description;
+    private String description;
 
-    @ManyToMany(mappedBy = "Tasks")
-    private Set<Category> Categories;
+    @ManyToMany(mappedBy = "tasks", cascade=CascadeType.ALL)
+    private Set<Category> categories;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project Project;
+    private Project project;
 
     @ManyToOne
     @JoinColumn(name = "state_id")
-    private State State;
+    private State state;
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public Set<Category> getCategories() {
-        return Categories;
+        return categories;
     }
 
     public void setCategories(Set<Category> categories) {
-        Categories = categories;
+        this.categories = categories;
     }
 
+    @JsonIgnore
     public Api.Entity.Project getProject() {
-        return Project;
+        return project;
     }
 
     public void setProject(Api.Entity.Project project) {
-        Project = project;
+        this.project = project;
     }
 
     public Api.Entity.State getState() {
-        return State;
+        return state;
     }
 
     public void setState(Api.Entity.State state) {
-        State = state;
+        this.state = state;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 }

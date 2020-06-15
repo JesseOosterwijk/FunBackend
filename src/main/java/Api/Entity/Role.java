@@ -1,10 +1,14 @@
 package Api.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,38 +18,44 @@ public class Role {
 
     @Id
     @Column(name = "Id")
-    private int Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @NotBlank
     @Column(name = "Name")
     @Size(min = 2)
-    private String Name;
+    private String name;
 
     @NotBlank
     @Column(name = "Description")
     @Size(min = 10)
-    private String Description;
+    private String description;
 
-    @ManyToMany(mappedBy = "Roles")
-    private Set<User> users;
+    @ManyToMany(mappedBy = "roles", cascade=CascadeType.ALL)
+    private Set<User> users = new HashSet<>();
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private Project project;
+
     public int getId() {
-        return Id;
+        return id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public Set<User> getUsers() {
@@ -57,7 +67,16 @@ public class Role {
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
+    }
+
+    @JsonIgnore
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public void addUser(User user) {

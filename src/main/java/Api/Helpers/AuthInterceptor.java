@@ -24,7 +24,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         String token = request.getHeader("AuthToken");
 
         if(token == null) {
-
             response.setStatus(401);
             return false;
         }
@@ -37,7 +36,6 @@ public class AuthInterceptor implements HandlerInterceptor {
             response.setStatus(401); //Unauthorized status
             return false;
         }
-
         request.setAttribute("user", data);
         return true;
 

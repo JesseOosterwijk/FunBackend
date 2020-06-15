@@ -1,10 +1,10 @@
 package Api.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,34 +30,30 @@ public class User {
     private String email;
 
     @JsonIgnore
-
     @Column(name = "Password")
     @Size(min = 5, message = "password not long enough")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "project_users",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")})
-    private Set<Project> Projects = new HashSet<>();
+    private Set<Project> projects = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private Set<Role> Roles;
+    private Set<Role> roles;
 
-    @JsonIgnore
     public UUID getId() {
         return id;
     }
 
-    @JsonIgnore
     public String getName() {
         return name;
     }
 
-    @JsonIgnore
     public String getEmail() {
         return email;
     }
@@ -67,20 +63,24 @@ public class User {
         return password;
     }
 
+    @JsonIgnore
     public Set<Project> getProjects() {
-        return Projects;
+        return projects;
     }
 
+    @JsonIgnore
     public Set<Role> getRoles() {
-        return Roles;
+        return roles;
     }
 
+    @JsonIgnore
     public void setProjects(Set<Project> projects) {
-        Projects = projects;
+        this.projects = projects;
     }
 
+    @JsonIgnore
     public void setRoles(Set<Role> roles) {
-        Roles = roles;
+        this.roles = roles;
     }
 
     @JsonIgnore
@@ -88,17 +88,14 @@ public class User {
         this.id = id;
     }
 
-    @JsonIgnore
     public void setName(String name) {
         this.name = name;
     }
 
-    @JsonIgnore
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @JsonIgnore
     public void setPassword(String password) {
         this.password = password;
     }

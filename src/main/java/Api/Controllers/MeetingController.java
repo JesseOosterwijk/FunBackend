@@ -5,14 +5,13 @@ import Api.Service.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/meeting")
+@CrossOrigin("*")
 public class MeetingController {
 
     private final MeetingService meetingService;
@@ -22,8 +21,7 @@ public class MeetingController {
         this.meetingService = meetingService;
     }
 
-    @CrossOrigin("http://localhost:4200")
-    @PostMapping("/saveMeeting")
+    @PostMapping()
     public ResponseEntity SaveMeeting(@Valid @RequestBody Meeting meeting)
     {
         try {
@@ -35,8 +33,7 @@ public class MeetingController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @CrossOrigin("http://localhost:4200")
-    @PostMapping("/deleteMeeting")
+    @DeleteMapping()
     public ResponseEntity DeleteMeeting(@Valid @RequestBody Meeting meeting)
     {
         try {

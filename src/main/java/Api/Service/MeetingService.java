@@ -31,4 +31,12 @@ public class MeetingService {
             throw e;
         }
     }
+
+    public Meeting findMeetingById(int id) {
+        try {
+            return meetingRepository.findMeetingById(id);
+        } catch(Exception e) {
+            throw e;
+        }
+    }
 }

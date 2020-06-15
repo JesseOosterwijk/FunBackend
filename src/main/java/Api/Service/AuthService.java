@@ -72,7 +72,6 @@ public class AuthService {
         HttpResponse<RegisterResponse> registerResponse = completableFutureRegisterResponse.get();
         if (registerResponse.statusCode() == 200) {
             user.setId(registerResponse.body().getUserId());
-            this.userRepo.save(user);
             return;
         }
         throw new RegisterException("Email or name already in use");

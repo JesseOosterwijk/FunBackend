@@ -13,26 +13,27 @@ public class State {
 
     @Id
     @Column(name = "Id")
-    private int Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @NotBlank
     @Column(name = "Name")
     @Size(min = 2)
-    private String Name;
+    private String name;
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 }

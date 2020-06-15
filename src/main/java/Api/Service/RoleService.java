@@ -31,4 +31,12 @@ public class RoleService {
         }
     }
 
+    public Role findRoleById(int id) {
+        try {
+            return roleRepository.findRoleById(id);
+        } catch(Exception e) {
+            throw e;
+        }
+    }
+
 }

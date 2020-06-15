@@ -20,6 +20,7 @@ import javax.validation.Valid;
 
 
 @RestController
+@CrossOrigin("*")
 public class UserController {
     private final UserService userService;
     private final AuthService authService;
@@ -30,7 +31,6 @@ public class UserController {
         this.authService = authService;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
     public ResponseEntity register(@Valid @RequestBody RegisterRequest request) {
         try {
@@ -41,7 +41,6 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         LoginResponse jwt;
@@ -56,7 +55,6 @@ public class UserController {
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/verify")
     public ResponseEntity<TokenData> verify(@RequestBody VerifyRequest request) {
         TokenData tokenData;

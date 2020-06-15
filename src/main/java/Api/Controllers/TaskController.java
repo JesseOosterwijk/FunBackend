@@ -1,18 +1,19 @@
 package Api.Controllers;
 
+import Api.Entity.Category;
 import Api.Entity.Task;
+import Api.Helpers.Data.TokenData;
 import Api.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/task")
+@CrossOrigin("*")
 public class TaskController {
 
     private final TaskService taskService;
@@ -22,8 +23,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @CrossOrigin("http://localhost:4200")
-    @PostMapping("/saveTask")
+    @PostMapping()
     public ResponseEntity SaveTask(@Valid @RequestBody Task task)
     {
         try {
@@ -35,8 +35,7 @@ public class TaskController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @CrossOrigin("http://localhost:4200")
-    @PostMapping("/deleteTask")
+    @DeleteMapping()
     public ResponseEntity DeleteTask(@Valid @RequestBody Task task)
     {
         try {
@@ -47,4 +46,17 @@ public class TaskController {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity DeleteTaskFromProject(int taskId, @RequestAttribute("user") TokenData user, @PathVariable int id) {
+        try {
+            Task task = taskService.findTaskById(taskId);
+            taskService.deleteTask(task);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }

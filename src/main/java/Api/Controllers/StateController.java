@@ -5,14 +5,13 @@ import Api.Service.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/state")
+@CrossOrigin("*")
 public class StateController {
 
     private final StateService stateService;
@@ -22,8 +21,7 @@ public class StateController {
         this.stateService = stateService;
     }
 
-    @CrossOrigin("http://localhost:4200")
-    @PostMapping("/saveState")
+    @PostMapping()
     public ResponseEntity SaveState(@Valid @RequestBody State state)
     {
         try {
@@ -35,8 +33,7 @@ public class StateController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @CrossOrigin("http://localhost:4200")
-    @PostMapping("/deleteState")
+    @DeleteMapping()
     public ResponseEntity DeleteState(@Valid @RequestBody State state)
     {
         try {

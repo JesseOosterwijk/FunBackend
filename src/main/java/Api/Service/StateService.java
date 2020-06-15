@@ -30,4 +30,12 @@ public class StateService {
             throw e;
         }
     }
+
+    public State findStateById(int id) {
+        try {
+            return stateRepository.findStateById(id);
+        } catch(Exception e) {
+            throw e;
+        }
+    }
 }
